@@ -1,0 +1,8 @@
+body{
+	/*font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;*/
+	font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;
+}
+
+#content{
+	animation: .5s;
+}
