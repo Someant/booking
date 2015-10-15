@@ -2,11 +2,7 @@
 @section('content')
 
 
-  <div class="ui text container" id="userpanel">
-    
-    <canvas id="salesChart" style="height: 180px; width: 95%;"></canvas>
-
-    
+  <div class="ui text container" id="userpanel">       
     <div class="ui middle aligned animated list relaxed">      
         <div class="item">
           <div class="right floated content" data-content="Add users to your feed">
@@ -19,6 +15,38 @@
           </div>
         </div>      
     </div>
+    
+    <div class="ui statistics container segment raised">
+      <div class="statistic">
+        <div class="value">
+          {{ $monthCount[0]->money }}
+        </div>
+        <div class="label">Month</div>
+      </div>
+      <div class="statistic">
+        <div class="text value">{{ $monthCount[0]->money }}<br>{{ $user->flow }} </div>
+        <div class="label">Flow </div>
+      </div>
+      <div class="statistic">
+        <div class="value text"><i class="smile icon"></i> {{ $weather->retData->l_tmp }}~{{ $weather->retData->h_tmp }} {{ $weather->retData->weather }}<br>FZ</div>
+        <div class="label">Weather </div>
+      </div>
+      
+    </div>
+    @if(count($money)!=0)
+    <div class="ui segment raised" style="margin-top:3em;">
+    <div class="canvas">
+    <canvas id="salesChart" class="container" style="height: 180px; width: 95%;"></canvas>
+    </div>
+    </div>
+    @endif
+
+    @if(count($money)==0)
+    <div class="ui black small floating message">
+      <p>您无最新数据 :) 点击右上角开启无趣的记账之旅吧！223333 <i class="smile icon"></i></p>
+    </div>
+    @endif
+    @if(count($money)!=0)      
     <div class="ui middle aligned animated list selection relaxed segment raised" id="content">
       @foreach ($money as $money)
       <div class="item">
@@ -32,14 +60,14 @@
       </div>
       @endforeach
     </div>
+
     <button class="fluid primary ui button" id="more" data-page="2">More</button>
+    @endif
   </div>
     <script>
       var myDate = new Date();
       var week=["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-      var weekey=myDate.getDay(); 
-
-      
+      var weekey=myDate.getDay();      
       var weekdata=[];
       for(var i=0;i<7;i++)
       {

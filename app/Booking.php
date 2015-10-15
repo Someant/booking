@@ -26,4 +26,9 @@ class Booking extends Model {
 	{
 		return DB::select('select sum(`money`) as money,add_time from bookings  where uid = ? group by add_time order by created_at desc limit 7', [$uid]);
 	}
+	
+	public static function getMonth($uid)
+	{
+		return DB::select('select sum(`money`) as money from bookings  where uid = ? and add_time > ? order by created_at desc', [$uid,date('Y-m-d',time()-date('d')*24*3600)]);
+	}
 }

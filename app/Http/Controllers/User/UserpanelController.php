@@ -84,10 +84,26 @@ class UserpanelController extends Controller {
 			}
 			
 		}
-		//dd($money->render());
+		
+		//weather
+		$ch = curl_init();
+		$url = 'http://apis.baidu.com/apistore/weatherservice/weather?citypinyin=fuzhou';
+		$header = array(
+			'apikey: e23463d52fdc28ef075bdbe659d2f2c1',
+		);
+		// 添加apikey到header
+		curl_setopt($ch, CURLOPT_HTTPHEADER  , $header);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		// 执行HTTP请求
+		curl_setopt($ch , CURLOPT_URL , $url);
+		$res = curl_exec($ch);
+		
 		return view('user.userpanel',array(
+			'user'=>Request::user(),
 			'money' => $money,
-			'week'=>$weekarray
+			'week'=>$weekarray,
+			'monthCount'=>Booking::getMonth(Request::user()->id),
+			'weather'=>json_decode($res),
 
 		));
 	}
