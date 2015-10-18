@@ -22,9 +22,8 @@
 
     <div class="ui middle aligned animated list selection relaxed">
     <div class="content">
+    <form action="{{ URL('home/setting') }}" class="ui form" method="post">
       <div class="ui segment raised">
-      <form action="{{ URL('home/setting') }}" class="ui form" method="post">
-
         <div class="field">
           <label>Username</label>
           <div class="ui left input">
@@ -38,17 +37,12 @@
           </div>
         </div>
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-      
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">      
     </div>
     <div class="actions">
-
-        <button class="fluid primary ui button">Save</button>
-
-      </form>
-      </div>
-
+         <button class="fluid primary ui button">Save</button>
+    </div>
+    </form>
     </div>
     </div>
   </div>

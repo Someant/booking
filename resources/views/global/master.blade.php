@@ -9,8 +9,9 @@
   <!-- Site Properities -->
   <title>Funny.LI(Beta) - No funny No free</title>
 
-  <link rel="stylesheet" type="text/css" href="{{url('style.css')}}">
   <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/semantic-ui/2.1.4/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="{{url('style.css')}}">
+
 
   <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/semantic-ui/2.1.4/semantic.min.js"></script>
@@ -125,6 +126,18 @@
         <div class="container">
             @yield('content')
         </div>
+  <session>
+         <div class="ui vertical footer segment">
+          <div class="ui center aligned container ">
+            <div class="ui horizontal inverted small divided link list segment raised">
+              <a class="item" href="#">Site Map</a>
+              <a class="item" href="#">Contact Us</a>
+              <a class="item" href="#">About Us</a>
+              <a class="item" href="#">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+  </session>      
         
    <script>
       $('select.dropdown').dropdown();
@@ -191,6 +204,16 @@
         }
         });
  
+      $(document).on('ajaxStart', function(){ 
+          $('.dimmer').addClass('active');
+      }); 
+ 
+      $(document).on('ajaxComplete', function(){ 
+          setTimeout(function(){ 
+            $('.dimmer').removeClass('active');
+         }, 200); 
+      }); 
+
    </script>     
         
 </body>

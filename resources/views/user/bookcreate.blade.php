@@ -15,9 +15,8 @@
 
     <div class="ui middle aligned animated list selection relaxed">
     <div class="content">
+    <form action="{{ URL('home/booking') }}" class="ui form" method="post">
       <div class="ui segment raised">
-      <form action="{{ URL('home/booking') }}" class="ui form" method="post">
-
         <div class="field">
           <label>Money</label>
           <div class="ui left action input">
@@ -49,11 +48,9 @@
       
     </div>
     <div class="actions">
-
         <button class="ui fluid primary button" type="submit">Save         <i class="checkmark icon"></i></button>
-
-      </form>
-    </div>  
+    </div>
+    </form>  
     </div>
     </div>
   </div>

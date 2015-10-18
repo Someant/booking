@@ -24,13 +24,18 @@
         <div class="label">Month</div>
       </div>
       <div class="statistic">
-        <div class="text value">{{ $monthCount[0]->money }}<br>{{ $user->flow }} </div>
-        <div class="label">Flow </div>
+        <div class="value">{{$weekcount}}</div>
+        <div class="label">Week </div>
       </div>
       <div class="statistic">
-        <div class="value text"><i class="smile icon"></i> {{ $weather->retData->l_tmp }}~{{ $weather->retData->h_tmp }} {{ $weather->retData->weather }}<br>FZ</div>
+        @if($weather->showapi_res_body->ret_code!=-1)
+        <div class="value text"><i class="smile icon"></i> {{ $weather->showapi_res_body->f1->night_air_temperature }}~{{ $weather->showapi_res_body->f1->day_air_temperature }} {{ $weather->showapi_res_body->f1->day_weather }}<br>{{ $weather->showapi_res_body->cityInfo->c4 }}</div>
+        @else
+        <div class="value text"><i class="frown icon"></i><br> No Data</div>
+        @endif
         <div class="label">Weather </div>
-      </div>
+    </div>
+
       
     </div>
     @if(count($money)!=0)
@@ -59,6 +64,9 @@
         </div>
       </div>
       @endforeach
+    <div class="ui inverted dimmer">
+      <div class="ui text loader">Loading</div>
+    </div>
     </div>
 
     <button class="fluid primary ui button" id="more" data-page="2">More</button>
@@ -69,6 +77,7 @@
       var week=["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       var weekey=myDate.getDay();      
       var weekdata=[];
+
       for(var i=0;i<7;i++)
       {
         if(weekey-i<0)
@@ -80,6 +89,7 @@
           weekdata[6-i]=week[weekey-i];
         }
       }
+      
       weekdata[6]='Today';
       weekdata[5]='Yesterday'
       var salesChartCanvas = $("#salesChart").get(0).getContext("2d");
@@ -142,7 +152,8 @@
       };
     
       //Create the line chart
-      salesChart.Line(salesChartData, salesChartOptions);      
+      salesChart.Line(salesChartData, salesChartOptions);
+    
    </script>
   
   

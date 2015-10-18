@@ -15,4 +15,25 @@ body{
 	#topmenu{
 		display: none;
 	}
+  #userpanel{
+    margin-top: -100px;
+  }
+}
+
+.visibility .overlay {
+  background-color: #FFFFFF;
+  padding: 0em;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  transition: all 0.5s ease;
+  background: transparent;
+}
+/* change style */
+.visibility .fixed.overlay {
+  position: fixed;
+  padding: 1em;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ui.inverted.segment, .ui.primary.inverted.segment{
+  background: #75975D;
 }

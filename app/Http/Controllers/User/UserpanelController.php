@@ -26,9 +26,10 @@ class UserpanelController extends Controller {
 
 		$money=Booking::getBook(Request::user()->id);
 		$week=Booking::getWeek(Request::user()->id);
-		//var_dump($week);
+		//var_dump(array_sum($week->money));
 		//dd($week);
 		$weekarray='';//$timearray=[];
+		$weekcount=0;
 		if(count($week)==0) $key=0;
 		krsort($week);
 		for($k=6;$k>-1;$k--)		
@@ -50,6 +51,8 @@ class UserpanelController extends Controller {
 			{
 				$weekarray=$weekarray.$val.',';				
 			}
+			
+			$weekcount+=$val;
 				
 		}
 
@@ -86,15 +89,25 @@ class UserpanelController extends Controller {
 		}
 		
 		//weather
+		if(getenv('HTTP_CLIENT_IP')){ 
+			$client_ip = getenv('HTTP_CLIENT_IP'); 
+		} elseif(getenv('HTTP_X_FORWARDED_FOR')) { 
+			$client_ip = getenv('HTTP_X_FORWARDED_FOR'); 
+		} elseif(getenv('REMOTE_ADDR')) {
+			$client_ip = getenv('REMOTE_ADDR'); 
+		} else {
+			$client_ip = $_SERVER['REMOTE_ADDR'];
+		} 
+
 		$ch = curl_init();
-		$url = 'http://apis.baidu.com/apistore/weatherservice/weather?citypinyin=fuzhou';
+		$url = 'http://apis.baidu.com/showapi_open_bus/weather_showapi/ip2weather?ip='.$client_ip.'&needMoreDay=0&needIndex=0';
 		$header = array(
 			'apikey: e23463d52fdc28ef075bdbe659d2f2c1',
 		);
-		// Ìí¼Óapikeyµ½header
+		// æ·»åŠ apikeyåˆ°header
 		curl_setopt($ch, CURLOPT_HTTPHEADER  , $header);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		// Ö´ÐÐHTTPÇëÇó
+		// æ‰§è¡ŒHTTPè¯·æ±‚
 		curl_setopt($ch , CURLOPT_URL , $url);
 		$res = curl_exec($ch);
 		
@@ -104,6 +117,7 @@ class UserpanelController extends Controller {
 			'week'=>$weekarray,
 			'monthCount'=>Booking::getMonth(Request::user()->id),
 			'weather'=>json_decode($res),
+			'weekcount'=>$weekcount
 
 		));
 	}
